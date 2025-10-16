@@ -4,12 +4,17 @@
  * Big title + subtitle + metadata footer with date and optional caption.
  * Props are strings; font sizes scale responsively.
  */
-const props = defineProps<{
+// PUBLIC_INTERFACE
+const props = withDefaults(defineProps<{
   title: string
   subtitle?: string
   date?: string
   caption?: string
-}>();
+}>(), {
+  subtitle: '',
+  date: '',
+  caption: '',
+});
 </script>
 
 <template>
@@ -22,7 +27,8 @@ const props = defineProps<{
     <footer class="title-footer" aria-label="Metadata">
       <div class="meta-left">
         <span class="meta-label">Prepared:</span>
-        <time :datetime="date" class="meta-value">{{ date }}</time>
+        <time v-if="date" :datetime="date" class="meta-value">{{ date }}</time>
+        <span v-else class="meta-value">—</span>
       </div>
       <div v-if="caption" class="meta-right muted">{{ caption }}</div>
     </footer>

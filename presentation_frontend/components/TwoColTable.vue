@@ -1,14 +1,23 @@
 <script setup lang="ts">
 type TableCell = string | number
 type Row = TableCell[]
-const props = defineProps<{
+// PUBLIC_INTERFACE
+const props = withDefaults(defineProps<{
   heading?: string
   bullets?: string[]
   tableTitle?: string
-  columns: string[]
-  rows: Row[]
+  columns?: string[]
+  rows?: Row[]
   caption?: string
-}>();
+}>(), {
+  heading: '',
+  bullets: () => [],
+  tableTitle: '',
+  columns: () => [],
+  rows: () => [],
+  caption: '',
+});
+const figId = `table-title-${Math.random().toString(36).slice(2, 8)}`
 </script>
 
 <template>
@@ -22,19 +31,19 @@ const props = defineProps<{
     </div>
     <div class="col right">
       <figure class="table-figure">
-        <figcaption v-if="tableTitle" class="table-title">{{ tableTitle }}</figcaption>
+        <figcaption v-if="tableTitle" :id="figId" class="table-title">{{ tableTitle }}</figcaption>
         <div class="table-wrap">
-          <table class="pro-table" aria-describedby="tableTitle" role="table">
+          <table class="pro-table" :aria-describedby="tableTitle ? figId : undefined" role="table">
             <thead>
               <tr>
-                <th v-for="(c, i) in columns" :key="i" scope="col" :class="{'is-num': i>0 && c.toLowerCase().includes('%')}">
+                <th v-for="(c, i) in (columns || [])" :key="i" scope="col" :class="{'is-num': i>0 && String(c).toLowerCase().includes('%')}">
                   {{ c }}
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(r, rIdx) in rows" :key="rIdx">
-                <td v-for="(cell, cIdx) in r" :key="cIdx" :class="numClass(columns[cIdx], cell)">
+              <tr v-for="(r, rIdx) in (rows || [])" :key="rIdx">
+                <td v-for="(cell, cIdx) in r" :key="cIdx" :class="numClass((columns || [])[cIdx], cell)">
                   {{ cell }}
                 </td>
               </tr>
@@ -51,9 +60,9 @@ const props = defineProps<{
 export default {
   methods: {
     numClass(header: string, cell: string | number) {
-      const h = (header || '').toLowerCase();
+      const h = String(header || '').toLowerCase();
       const isNum = /%|rate|turns|level|fte|count|qty|days|hours|#|total|cost|allocation/.test(h);
-      const looksNum = typeof cell === 'number' || /^[\d,.\-%]+$/.test(String(cell));
+      const looksNum = typeof cell === 'number' || /^[\d,.\-%]+$/.test(String(cell ?? ''));
       return { 'is-num': isNum || looksNum };
     },
   },

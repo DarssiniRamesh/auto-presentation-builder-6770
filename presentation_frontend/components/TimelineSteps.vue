@@ -1,9 +1,14 @@
 <script setup lang="ts">
-const props = defineProps<{
+// PUBLIC_INTERFACE
+const props = withDefaults(defineProps<{
   title?: string
-  steps: Array<{ phase: string; dates: string; owner: string; status: string }>
+  steps?: Array<{ phase: string; dates: string; owner: string; status: string }>
   caption?: string
-}>();
+}>(), {
+  title: '',
+  steps: () => [],
+  caption: '',
+});
 </script>
 
 <template>
@@ -20,7 +25,7 @@ const props = defineProps<{
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(s, i) in steps" :key="i">
+          <tr v-for="(s, i) in (steps || [])" :key="i">
             <td>{{ s.phase }}</td>
             <td class="is-num">{{ s.dates }}</td>
             <td>{{ s.owner }}</td>

@@ -1,9 +1,14 @@
 <script setup lang="ts">
-const props = defineProps<{
+// PUBLIC_INTERFACE
+const props = withDefaults(defineProps<{
   title?: string
-  items: Array<{ risk: string; impact: string; likelihood: string; mitigation: string }>
+  items?: Array<{ risk: string; impact: string; likelihood: string; mitigation: string }>
   caption?: string
-}>();
+}>(), {
+  title: '',
+  items: () => [],
+  caption: '',
+});
 </script>
 
 <template>
@@ -20,7 +25,7 @@ const props = defineProps<{
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(it, i) in items" :key="i">
+          <tr v-for="(it, i) in (items || [])" :key="i">
             <td class="w-40">{{ it.risk }}</td>
             <td class="w-14 is-num">{{ it.impact }}</td>
             <td class="w-18 is-num">{{ it.likelihood }}</td>

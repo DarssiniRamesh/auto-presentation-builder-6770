@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+ // PUBLIC_INTERFACE
 const props = defineProps({
   count: {
     default: 0,

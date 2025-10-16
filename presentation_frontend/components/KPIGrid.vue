@@ -1,10 +1,16 @@
 <script setup lang="ts">
-const props = defineProps<{
+// PUBLIC_INTERFACE
+const props = withDefaults(defineProps<{
   title?: string
-  kpis: Array<{ label: string; value: string; delta?: string; note?: string }>
+  kpis?: Array<{ label: string; value: string; delta?: string; note?: string }>
   columns?: 2 | 3
   caption?: string
-}>();
+}>(), {
+  title: '',
+  kpis: () => [],
+  columns: 3,
+  caption: '',
+});
 </script>
 
 <template>

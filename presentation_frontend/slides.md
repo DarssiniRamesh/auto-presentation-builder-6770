@@ -40,7 +40,7 @@ Notes:
     { label: 'Service Level', value: '96.5%', delta: '+0.7pp' },
     { label: 'Inventory Turns', value: '7.2x' },
     { label: 'Backorder Rate', value: '1.1%' }
-  ]"
+  ]
   caption="Indicative targets; adjust per segment and seasonality."
 />
 
@@ -58,7 +58,7 @@ Notes:
     'Inputs: transactions, channels, market factors, seasonality',
     'Controls: RBAC, audit, and compliance checkpoints',
     'Outputs: forecast, staffing plan, inventory & service targets'
-  ]"
+  ]
   tableTitle="Demand Signals and Governance"
   :columns="['Channel', 'Data Source', 'Frequency', 'Owner']"
   :rows="[
@@ -68,7 +68,7 @@ Notes:
     ['Partner', 'EDI/API Feeds', 'Weekly', 'Alliances'],
     ['Marketing', 'Campaign / Web Analytics', 'Daily', 'Growth'],
     ['External', 'Market / Seasonality', 'Monthly', 'FP&A']
-  ]"
+  ]
   caption="Ensure data quality SLAs and late-arriving data handling."
 />
 
@@ -93,7 +93,7 @@ Notes:
     ['Security/Compliance', '0.5', '40%', 'Policies, Evidence, SIEM', 'Vault, SIEM'],
     ['UX/BA', '1.0', '65%', 'Research, Flows, Backlog', 'Figma, Jira'],
     ['PM', '1.0', '70%', 'Deliverables, Risks, Budget', 'Jira, Sheets']
-  ]"
+  ]
   caption="Values are placeholders where the PDF did not specify exact counts; validate during Discovery."
 />
 
@@ -112,7 +112,7 @@ Notes:
     { risk: 'Supply constraints affecting service levels', impact: 'High', likelihood: 'Medium', mitigation: 'Prioritization rules, safety stock, expedite paths' },
     { risk: 'Integration complexity (SSO/CTI/IGMS)', impact: 'High', likelihood: 'Medium', mitigation: 'Contract tests, phased cut-ins, mocks' },
     { risk: 'Compliance/VAPT findings late', impact: 'High', likelihood: 'Low', mitigation: 'Pre-UAT scans, dedicated hardening buffer' }
-  ]"
+  ]
   caption="Track residual risk and mitigation owners per phase."
 />
 
@@ -130,7 +130,7 @@ Notes:
     { phase: 'Modeling', dates: 'Weeks 3–4', owner: 'Data/Arch', status: 'In Progress' },
     { phase: 'Pilot', dates: 'Weeks 5–10', owner: 'Eng Leads', status: 'At Risk' },
     { phase: 'Rollout', dates: 'Weeks 11–22', owner: 'PM/Eng', status: 'TBD' }
-  ]"
+  ]
   caption="Dates align to a ~22-week plan; refine per dependency readiness."
 />
 
@@ -150,7 +150,7 @@ Notes:
     ['Lock API & integration contracts', 'Arch', 'T+2 weeks', 'Partner/SSO/CTI teams'],
     ['Finalize staffing and schedule', 'PM', 'T+1 week', 'Budget confirmation'],
     ['Agree KPI targets & reporting', 'Ops/FP&A', 'T+2 weeks', 'Data availability']
-  ]"
+  ]
   caption="Replace T+X placeholders with calendar dates on approval."
 />
 

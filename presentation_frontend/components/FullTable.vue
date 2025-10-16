@@ -1,12 +1,18 @@
 <script setup lang="ts">
 type TableCell = string | number
 type Row = TableCell[]
-const props = defineProps<{
+// PUBLIC_INTERFACE
+const props = withDefaults(defineProps<{
   title?: string
-  columns: string[]
-  rows: Row[]
+  columns?: string[]
+  rows?: Row[]
   caption?: string
-}>();
+}>(), {
+  title: '',
+  columns: () => [],
+  rows: () => [],
+  caption: '',
+});
 </script>
 
 <template>
@@ -16,12 +22,12 @@ const props = defineProps<{
       <table class="pro-table dense" role="table">
         <thead>
           <tr>
-            <th v-for="(c, i) in columns" :key="i" scope="col" :class="{'is-num': isNumericHeader(c)}">{{ c }}</th>
+            <th v-for="(c, i) in (columns || [])" :key="i" scope="col" :class="{'is-num': isNumericHeader(c)}">{{ c }}</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(r, idx) in rows" :key="idx">
-            <td v-for="(cell, cIdx) in r" :key="cIdx" :class="cellClass(columns[cIdx], cell)">{{ cell }}</td>
+          <tr v-for="(r, idx) in (rows || [])" :key="idx">
+            <td v-for="(cell, cIdx) in r" :key="cIdx" :class="cellClass((columns || [])[cIdx], cell)">{{ cell }}</td>
           </tr>
         </tbody>
       </table>
@@ -34,11 +40,11 @@ const props = defineProps<{
 export default {
   methods: {
     isNumericHeader(h: string) {
-      const s = (h || '').toLowerCase();
+      const s = String(h || '').toLowerCase();
       return /%|rate|turns|level|fte|count|qty|days|hours|#|total|cost|allocation|headcount/.test(s);
     },
     cellClass(header: string, cell: string | number) {
-      const looksNum = typeof cell === 'number' || /^[\d,.\-%]+$/.test(String(cell));
+      const looksNum = typeof cell === 'number' || /^[\d,.\-%]+$/.test(String(cell ?? ''));
       return { 'is-num': this.isNumericHeader(header) || looksNum };
     },
   },
