@@ -1,574 +1,237 @@
 ---
 # Global deck settings
+title: "Demand Planning Overview"
 theme: default
-title: Your Presentation Title
-info: |
-  Professional presentation template with dark theme
-  20 slides with modern components
-class: text-left
 mdc: true
+class: text-left
 transition: slide-left
 fonts:
   sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial
   mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
 css: |
   @import "./style.css";
+info: |
+  Styled with Ocean Professional palette.
+  Source: "CRM Application Demand, Resource, and Costing Plan" (extracted summary).
 ---
 
-# PROJECT TITLE
+# Demand Planning Overview
 <div class="title-slide with-hero-glow">
-  <div class="hero-copy">
-    <h2 class="text-hero">Transform Your Business with Innovation</h2>
-    <p class="subtitle text-md">A comprehensive solution for modern enterprises</p>
-    <div class="subtitle text-xs">Presenter Name • Date • contact@example.com</div>
-    <div class="hero-ctas mt-2">
-      <button class="btn-primary">Get Started</button>
-      <button class="btn-secondary">Learn More</button>
-    </div>
+  <div>
+    <h2 class="text-hero">CRM Application Demand, Resource, and Costing Plan</h2>
+    <p class="subtitle text-md">Customer360 • Service Requests • Workflow • Omni-channel • BOT • Analytics • Security</p>
+    <div class="subtitle text-xs">Prepared: {{ new Date().toLocaleDateString() }}</div>
   </div>
 </div>
+
+Notes:
+- Introduce purpose: align demand, capacity, and budget for CRM multi-service delivery.
+- Emphasize Ocean Professional look: clean cards, subtle gradients, blue accents.
 
 ---
 
-# The Challenge
-
-<div class="problem-grid">
-  <div class="problem-card">
-    <div class="eyebrow">Current State</div>
-    <h3 class="feature-title">Market Inefficiencies</h3>
-    <ul class="points-clean">
-      <li>Complex processes and workflows</li>
-      <li>Disconnected systems and data silos</li>
-      <li>High operational costs</li>
-    </ul>
-  </div>
-
-  <div class="problem-card">
-    <div class="eyebrow">Industry Trends</div>
-    <h3 class="feature-title">Rapid Digital Evolution</h3>
-    <ul class="points-clean">
-      <li>Accelerating technology adoption</li>
-      <li>Changing customer expectations</li>
-      <li>New competitive pressures</li>
-    </ul>
-  </div>
-
-  <div class="problem-card">
-    <div class="eyebrow">Gap Analysis</div>
-    <h3 class="feature-title">Missing Capabilities</h3>
-    <ul class="points-clean">
-      <li>Limited automation tools</li>
-      <li>Insufficient analytics</li>
-      <li>Poor integration options</li>
-      <li>Lack of scalability</li>
-    </ul>
-  </div>
-</div>
-
----
-
-# Our Solution
-
-A comprehensive platform that addresses key business challenges
-
-<div class="stats-band mt-2">
-  <div class="stat-card">
-    <div class="stat-number">10x</div>
-    <div class="stat-label">Faster Processing</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number">50%</div>
-    <div class="stat-label">Cost Reduction</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number">99.9%</div>
-    <div class="stat-label">Uptime</div>
-  </div>
-</div>
-
+# Current Demand Context
 <div class="card-grid three mt-2">
-  <div class="feature-card">
-    <div class="eyebrow">Core</div>
-    <h3 class="feature-title">Intelligent Automation</h3>
-    <p class="muted">Streamline workflows with AI-powered processes</p>
+  <div class="problem-card">
+    <div class="eyebrow">Scope</div>
+    <ul class="points-clean">
+      <li>9+ services: Customer360, Service Requests, Workflow, Omni Channel, BOT, Reporting, SysAdmin/Security, API Gateway, Mobile/Offline</li>
+      <li>Application DB, cross-cutting Security & Compliance</li>
+      <li>SEBI-compliant security, auditability, DR/BCP</li>
+    </ul>
   </div>
-
-  <div class="feature-card">
-    <div class="eyebrow">Integration</div>
-    <h3 class="feature-title">Seamless Connectivity</h3>
-    <p class="muted">Connect all your tools and systems effortlessly</p>
+  <div class="problem-card">
+    <div class="eyebrow">Drivers</div>
+    <ul class="points-clean">
+      <li>Omni-channel case intake and IGMS integration</li>
+      <li>RBAC, encryption at rest/in transit, audit trails</li>
+      <li>Mobile/offline secure sync and analytics reporting</li>
+    </ul>
   </div>
-
-  <div class="feature-card">
-    <div class="eyebrow">Analytics</div>
-    <h3 class="feature-title">Real-time Insights</h3>
-    <p class="muted">Make data-driven decisions with powerful analytics</p>
+  <div class="problem-card">
+    <div class="eyebrow">Assumptions</div>
+    <ul class="points-clean">
+      <li>Complexity points → PD (Small=3, Med=8, Large=20, XL=40)</li>
+      <li>Integrations via SOA APIs; no direct external DB access</li>
+      <li>Contingency: 15% (Build/Integration/Hardening), 10% (UAT/Go-live)</li>
+    </ul>
   </div>
 </div>
 
+Notes:
+- Document maps module demand using weighted complexity points.
+- Compliance and integrations are first-class NFRs shaping demand.
+
 ---
 
-# Key Features
+# Forecasting Approach
+<div class="grid-2 mt-2">
+  <div class="card">
+    <div class="eyebrow">Methods & Cadence</div>
+    <ul class="points-clean">
+      <li>Point-based estimation converted to person-days (PD) and FTE-months</li>
+      <li>Phase-based planning: P1 Discovery → P6 Go-live (~22 weeks total)</li>
+      <li>Rolling updates at phase gates with contingency buffers</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="eyebrow">Data Inputs</div>
+    <ul class="points-clean">
+      <li>Work items + OpenAPI specs per service</li>
+      <li>Security/Compliance controls, integration touchpoints</li>
+      <li>Complexity per module (Total points ≈ 276)</li>
+    </ul>
+  </div>
+</div>
 
+Notes:
+- Highlight conversion: 1 PD = 8 hours; 1 FTE mo ≈ 20 PD.
+- Total calendar ~5–6 months based on scope breadth.
+
+---
+
+# Resource & Capacity Planning
 <div class="split-cols mt-2">
   <div class="left">
     <div class="feature-card">
-      <h3 class="feature-title">Smart Dashboard</h3>
-      <p class="muted">Centralized control and monitoring</p>
-    </div>
-    <div class="feature-card">
-      <h3 class="feature-title">Advanced Analytics</h3>
-      <p class="muted">Deep insights and predictive modeling</p>
-    </div>
-    <div class="feature-card">
-      <h3 class="feature-title">Workflow Automation</h3>
-      <p class="muted">Streamline repetitive tasks</p>
-    </div>
-  </div>
-  <div class="right">
-    <div class="glass-frame tall">
-      <div class="placeholder">Product Screenshot / Dashboard UI</div>
-    </div>
-  </div>
-</div>
-
----
-
-# Architecture Overview
-
-```mermaid
-%%{init: {
-  "theme": "dark",
-  "themeVariables": {
-    "primaryTextColor": "#E6EDF3",
-    "primaryColor": "#0B1220",
-    "lineColor": "#6E7681"
-  }
-}}%%
-
-flowchart TD
-    UI[🖥️ User Interface] --> API[⚙️ API Gateway]
-    API --> Auth[🔐 Authentication]
-    API --> Core[💼 Core Services]
-    Core --> DB[(📊 Database)]
-    Core --> Cache[(⚡ Cache)]
-    Core --> Queue[📬 Message Queue]
-    Queue --> Workers[🤖 Background Workers]
-    
-    style UI fill:#1C1A2B,stroke:#6B7FEB
-    style API fill:#1C1A2B,stroke:#6B7FEB
-    style Core fill:#1C1A2B,stroke:#6B7FEB
-    style DB fill:#2B2931,stroke:#40D79E
-    style Cache fill:#2B2931,stroke:#FFC75A
-```
-
----
-
-# Use Cases
-
-<div class="card-grid three mt-2">
-  <div class="feature-card"><h3 class="feature-title">Enterprise Resource Planning</h3><p class="muted">Unified business management</p></div>
-  <div class="feature-card"><h3 class="feature-title">Customer Relationship Management</h3><p class="muted">360-degree customer view</p></div>
-  <div class="feature-card"><h3 class="feature-title">Supply Chain Optimization</h3><p class="muted">End-to-end visibility</p></div>
-  <div class="feature-card"><h3 class="feature-title">Financial Analytics</h3><p class="muted">Real-time financial insights</p></div>
-  <div class="feature-card"><h3 class="feature-title">HR Management</h3><p class="muted">Streamlined HR processes</p></div>
-  <div class="feature-card"><h3 class="feature-title">Project Management</h3><p class="muted">Collaborative project tracking</p></div>
-</div>
-
----
-
-# Market Opportunity
-
-<div class="split-cols mt-2">
-  <div class="left">
-    <div class="feature-card">
-      <div class="eyebrow">TAM</div>
-      <h3 class="feature-title">Total Addressable Market</h3>
-      <p class="muted">$100B+ globally</p>
-    </div>
-    <div class="feature-card">
-      <div class="eyebrow">Growth</div>
-      <h3 class="feature-title">Market Expansion</h3>
-      <p class="muted">25% CAGR expected</p>
-    </div>
-    <div class="feature-card">
-      <div class="eyebrow">Segments</div>
+      <div class="eyebrow">Roles & Skills</div>
       <ul class="points-clean">
-        <li>Enterprise (500+ employees)</li>
-        <li>Mid-market (50-500)</li>
-        <li>SMB (under 50)</li>
+        <li>Architect; Backend (FastAPI) Sr/Mid; Frontend (React); Mobile (Flutter)</li>
+        <li>Data/BI, DevOps/SRE, Security/Compliance, QA/Automation, UX/BA, PM</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <div class="eyebrow">Allocation (Examples)</div>
+      <ul class="points-clean">
+        <li>Build dominates capacity across nine services</li>
+        <li>Integration & Hardening cover security, audit, DR</li>
+        <li>UAT for SEBI/internal compliance evidence & KT</li>
       </ul>
     </div>
   </div>
   <div class="right">
-    <div class="glass-frame">
-      <div class="placeholder">Market Size Chart</div>
+    <div class="card">
+      <div class="eyebrow">Phase Cadence</div>
+      <ul class="points-clean">
+        <li>P1 Discovery: 2w — scope, contracts, security baseline</li>
+        <li>P2 Build: 8w — feature dev, unit/component tests, RBAC/audit wiring</li>
+        <li>P3 Integration: 4w — CTI/IVR, LDAP/AD SSO, IGMS, API Gateway</li>
+        <li>P4 Hardening: 3w — perf, VAPT, DR runbooks, SIEM/SOC</li>
+        <li>P5 UAT: 3w — audits, training, documentation</li>
+        <li>P6 Go-live: 2w — cutover, hypercare</li>
+      </ul>
     </div>
   </div>
 </div>
 
+Notes:
+- Total FTE-months approx 53.7 across roles and phases.
+- Capacity reflects blended seniority and integration complexity.
+
 ---
 
-# Competitive Landscape
-
-<div class="glass-frame wide mt-2">
-  <div class="placeholder">Competitive Positioning Matrix</div>
-</div>
-
+# Costing & Budget Implications
 <div class="card-grid three mt-2">
   <div class="feature-card">
-    <h3 class="feature-title">Our Advantages</h3>
+    <div class="eyebrow">Cost Drivers</div>
     <ul class="points-clean">
-      <li>Superior technology</li>
-      <li>Better user experience</li>
-      <li>Competitive pricing</li>
+      <li>Role-based blended rates (e.g., Arch $120/hr, Sr Eng $90/hr)</li>
+      <li>High-load phases: Build, Integration, Hardening</li>
+      <li>Contingency added per phase (15%/10%)</li>
     </ul>
   </div>
   <div class="feature-card">
-    <h3 class="feature-title">Market Position</h3>
+    <div class="eyebrow">Phase Roll-up (USD)</div>
     <ul class="points-clean">
-      <li>Leader in innovation</li>
-      <li>Strong brand recognition</li>
-      <li>Growing market share</li>
+      <li>Subtotal across phases: ~$576,260</li>
+      <li>Contingency: ~$76,216</li>
+      <li>Total Estimated Cost: ~$652,476</li>
     </ul>
   </div>
   <div class="feature-card">
-    <h3 class="feature-title">Differentiators</h3>
+    <div class="eyebrow">Module View (Indicative)</div>
     <ul class="points-clean">
-      <li>AI-powered features</li>
-      <li>Seamless integrations</li>
-      <li>Enterprise-grade security</li>
+      <li>XL (40 pt): Customer360, Service Requests, SysAdmin/Security</li>
+      <li>L (20 pt): Workflow, Omni, BOT, Reporting, Mobile, DB, Security (x-cut)</li>
+      <li>M (8 pt): API Gateway, Knowledge Base</li>
     </ul>
   </div>
 </div>
 
+Notes:
+- Phase table converts FTE months to PD to cost using blended rates.
+- Excludes infra and 3rd-party licensing (price separately).
+
 ---
 
-# Implementation Timeline
+# Risks, Assumptions, Mitigations
+<div class="card-grid three mt-2">
+  <div class="feature-card">
+    <div class="eyebrow">Risks</div>
+    <ul class="points-clean">
+      <li>Integration complexity (Dialer/IGMS/LDAP)</li>
+      <li>VAPT/compliance findings late in cycle</li>
+      <li>Offline sync conflicts; reporting performance</li>
+    </ul>
+  </div>
+  <div class="feature-card">
+    <div class="eyebrow">Mitigations</div>
+    <ul class="points-clean">
+      <li>Early mocks, phased cut-ins, SLAs</li>
+      <li>Embed Security lead; pre-UAT scans; P4 remediation buffer</li>
+      <li>Conflict strategy, indexing/materialized views, export optimization</li>
+    </ul>
+  </div>
+  <div class="feature-card">
+    <div class="eyebrow">Assumptions/Exclusions</div>
+    <ul class="points-clean">
+      <li>SOA APIs only; no external DB access</li>
+      <li>Licensing/infra excluded from engineering costs</li>
+      <li>KB content creation beyond skeletons is out of scope</li>
+    </ul>
+  </div>
+</div>
 
+Notes:
+- Maintain architecture governance and contract tests to reduce drifts.
+- Bandwidth/payload optimizations for PWA/mobile.
+
+---
+
+# Next Steps & Timeline
 <div class="timeline mt-2">
   <div class="time-node">
     <div class="time-dot"></div>
     <div class="time-card">
-      <div class="eyebrow">Phase 1: Q1 2025</div>
-      <h4>Foundation</h4>
+      <div class="eyebrow">Immediate</div>
       <ul class="points-clean">
-        <li>System architecture design</li>
-        <li>Core infrastructure setup</li>
-        <li>Initial team formation</li>
+        <li>Sign-off on scope, API contracts, security baseline</li>
+        <li>Confirm phase plan, staffing, and budgets</li>
       </ul>
     </div>
   </div>
   <div class="time-node">
     <div class="time-dot"></div>
     <div class="time-card">
-      <div class="eyebrow">Phase 2: Q2 2025</div>
-      <h4>Development</h4>
+      <div class="eyebrow">Near-Term (P2–P3)</div>
       <ul class="points-clean">
-        <li>MVP development</li>
-        <li>Beta testing program</li>
-        <li>Initial customer feedback</li>
+        <li>Build features; enable RBAC/audit; initial dashboards</li>
+        <li>Integrate CTI/IVR, SSO, IGMS, API Gateway</li>
       </ul>
     </div>
   </div>
   <div class="time-node">
     <div class="time-dot future"></div>
     <div class="time-card">
-      <div class="eyebrow">Phase 3: Q3 2025</div>
-      <h4>Launch</h4>
+      <div class="eyebrow">P4–P6</div>
       <ul class="points-clean">
-        <li>Public release</li>
-        <li>Marketing campaign</li>
-        <li>Customer onboarding</li>
+        <li>Hardening: performance, VAPT fixes, DR/BCP</li>
+        <li>UAT, audits, KT; Go-live cutover + hypercare</li>
       </ul>
     </div>
   </div>
 </div>
 
----
-
-# Success Metrics
-
-<div class="stats-grid mt-2">
-  <div class="stat-card">
-    <div class="stat-number">1M+</div>
-    <div class="stat-label">Active Users</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number">$50M</div>
-    <div class="stat-label">ARR</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number">95%</div>
-    <div class="stat-label">Retention Rate</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number">150</div>
-    <div class="stat-label">Enterprise Clients</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number">4.8</div>
-    <div class="stat-label">Customer Rating</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number">24/7</div>
-    <div class="stat-label">Support</div>
-  </div>
-</div>
-
----
-
-# Case Study
-
-<div class="split-cols mt-2">
-  <div class="left">
-    <div class="feature-card">
-      <div class="eyebrow">Client</div>
-      <h3 class="feature-title">Fortune 500 Company</h3>
-      <ul class="points-clean">
-        <li>10,000+ employees</li>
-        <li>Global operations</li>
-        <li>Complex IT infrastructure</li>
-      </ul>
-    </div>
-    <div class="feature-card">
-      <div class="eyebrow">Challenge</div>
-      <ul class="points-clean">
-        <li>Fragmented systems</li>
-        <li>Manual processes</li>
-        <li>Limited visibility</li>
-      </ul>
-    </div>
-  </div>
-  <div class="right">
-    <div class="feature-card glass">
-      <div class="eyebrow">Results</div>
-      <h3 class="feature-title">Transformation Achieved</h3>
-      <ul class="points-clean">
-        <li>60% efficiency improvement</li>
-        <li>$5M annual savings</li>
-        <li>Real-time insights</li>
-      </ul>
-    </div>
-    <div class="glass-frame short">
-      <div class="placeholder">ROI Chart</div>
-    </div>
-  </div>
-</div>
-
----
-
-# Pricing & Plans
-
-<div class="card-grid three mt-2">
-  <div class="feature-card">
-    <div class="eyebrow">Starter</div>
-    <h3 class="feature-title">$99/month</h3>
-    <ul class="points-clean">
-      <li>Up to 10 users</li>
-      <li>Basic features</li>
-      <li>Email support</li>
-      <li>5GB storage</li>
-    </ul>
-    <button class="btn-secondary mt-2">Choose Plan</button>
-  </div>
-  <div class="feature-card">
-    <div class="pill">Popular</div>
-    <h3 class="feature-title">$299/month</h3>
-    <ul class="points-clean">
-      <li>Up to 50 users</li>
-      <li>Advanced features</li>
-      <li>Priority support</li>
-      <li>100GB storage</li>
-      <li>API access</li>
-    </ul>
-    <button class="btn-primary mt-2">Choose Plan</button>
-  </div>
-  <div class="feature-card">
-    <div class="eyebrow">Enterprise</div>
-    <h3 class="feature-title">Custom</h3>
-    <ul class="points-clean">
-      <li>Unlimited users</li>
-      <li>All features</li>
-      <li>Dedicated support</li>
-      <li>Unlimited storage</li>
-      <li>Custom integrations</li>
-    </ul>
-    <button class="btn-secondary mt-2">Contact Sales</button>
-  </div>
-</div>
-
----
-
-# Technology Stack
-
-<div class="feature-grid mt-2">
-  <div class="feature-card">
-    <div class="eyebrow">Frontend</div>
-    <ul class="points-clean">
-      <li>React / Vue.js / Angular</li>
-      <li>TypeScript</li>
-      <li>Tailwind CSS</li>
-    </ul>
-  </div>
-  <div class="feature-card">
-    <div class="eyebrow">Backend</div>
-    <ul class="points-clean">
-      <li>Node.js / Python / Go</li>
-      <li>GraphQL / REST APIs</li>
-      <li>Microservices</li>
-    </ul>
-  </div>
-  <div class="feature-card">
-    <div class="eyebrow">Infrastructure</div>
-    <ul class="points-clean">
-      <li>AWS / Azure / GCP</li>
-      <li>Kubernetes</li>
-      <li>CI/CD pipelines</li>
-    </ul>
-  </div>
-  <div class="feature-card">
-    <div class="eyebrow">Data</div>
-    <ul class="points-clean">
-      <li>PostgreSQL / MongoDB</li>
-      <li>Redis</li>
-      <li>Elasticsearch</li>
-    </ul>
-  </div>
-  <div class="feature-card">
-    <div class="eyebrow">Security</div>
-    <ul class="points-clean">
-      <li>End-to-end encryption</li>
-      <li>OAuth 2.0 / SAML</li>
-      <li>SOC 2 compliant</li>
-    </ul>
-  </div>
-  <div class="feature-card">
-    <div class="eyebrow">Monitoring</div>
-    <ul class="points-clean">
-      <li>Prometheus / Grafana</li>
-      <li>ELK Stack</li>
-      <li>APM tools</li>
-    </ul>
-  </div>
-</div>
-
----
-
-# Team
-
-<div class="card-grid four mt-2">
-  <div class="feature-card">
-    <h4 class="feature-title">CEO</h4>
-    <p class="muted small">20+ years experience</p>
-    <p class="muted small">Former Fortune 500 exec</p>
-  </div>
-  <div class="feature-card">
-    <h4 class="feature-title">CTO</h4>
-    <p class="muted small">15+ years in tech</p>
-    <p class="muted small">Ex-FAANG engineer</p>
-  </div>
-  <div class="feature-card">
-    <h4 class="feature-title">CPO</h4>
-    <p class="muted small">Product visionary</p>
-    <p class="muted small">3 successful exits</p>
-  </div>
-  <div class="feature-card">
-    <h4 class="feature-title">CFO</h4>
-    <p class="muted small">Finance expert</p>
-    <p class="muted small">IPO experience</p>
-  </div>
-</div>
-
-<div class="card mt-2">
-  <h3>Advisory Board</h3>
-  <ul class="points-clean">
-    <li>Industry veterans from leading tech companies</li>
-    <li>Domain experts in enterprise software</li>
-    <li>Strategic advisors with deep market connections</li>
-  </ul>
-</div>
-
----
-
-# Customer Testimonials
-
-<div class="card-grid two mt-2">
-  <div class="feature-card glass">
-    <p class="muted">"This platform transformed our operations. We've seen incredible efficiency gains and cost savings."</p>
-    <div class="mt-2">
-      <strong>John Smith</strong><br>
-      <span class="text-xs muted">CTO, Tech Corp</span>
-    </div>
-  </div>
-  <div class="feature-card glass">
-    <p class="muted">"The best investment we've made. ROI was evident within the first quarter."</p>
-    <div class="mt-2">
-      <strong>Jane Doe</strong><br>
-      <span class="text-xs muted">CEO, Innovation Inc</span>
-    </div>
-  </div>
-</div>
-
----
-
-# Next Steps
-
-<div class="cta-band">
-  <div>
-    <div class="overline">Get Started Today</div>
-    <h2 class="text-hero">Ready to Transform Your Business?</h2>
-    <p class="muted">Join thousands of companies already using our platform</p>
-    <div class="cta-actions">
-      <button class="btn-primary">Start Free Trial</button>
-      <button class="btn-secondary">Schedule Demo</button>
-    </div>
-  </div>
-  <div>
-    <div class="card">
-      <div class="eyebrow">Contact</div>
-      <ul class="points-clean">
-        <li>Sales: sales@example.com</li>
-        <li>Support: support@example.com</li>
-        <li>Phone: 1-800-EXAMPLE</li>
-      </ul>
-      <div class="muted small mt-4">www.example.com</div>
-    </div>
-  </div>
-</div>
-
----
-
-# Appendix
-
-<div class="card-grid two mt-2">
-  <div class="feature-card">
-    <h3 class="feature-title">Resources</h3>
-    <ul class="points-clean">
-      <li>Technical documentation</li>
-      <li>API reference</li>
-      <li>Video tutorials</li>
-      <li>Community forum</li>
-    </ul>
-  </div>
-  <div class="feature-card">
-    <h3 class="feature-title">Legal</h3>
-    <ul class="points-clean">
-      <li>Terms of service</li>
-      <li>Privacy policy</li>
-      <li>Security compliance</li>
-      <li>SLA agreements</li>
-    </ul>
-  </div>
-</div>
-
----
-layout: center
-class: text-center
----
-
-# Thank You
-
-Questions?
-
-<div class="mt-4 subtle">Press S for presenter mode • Press E to open editor • Use arrow keys to navigate</div>
+Notes:
+- Total calendar ≈ 22 weeks (5–6 months).
+- Track milestones via phase gates and report variances early.
