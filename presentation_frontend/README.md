@@ -42,6 +42,7 @@ Press `S` for presenter mode to view speaker notes.
 ## Notes
 
 - Vite dev server is configured on port 3000 in `vite.config.ts`.
+- Use Node.js 20.x for local builds to match CI.
 - No external services or API keys required.
 - Deck structure and content derived from a CRM demand planning context; replace placeholders with your data as needed.
 

@@ -34,7 +34,7 @@ Notes:
   title="Key Performance Indicators"
   :columns="3"
   :kpis="[
-    { label: 'Forecast Accuracy', value: '±6–10%' , note: 'Monthly rolling' },
+    { label: 'Forecast Accuracy', value: '+/- 6-10%' , note: 'Monthly rolling' },
     { label: 'Bias', value: '+1.5%', delta: '-0.5pp MoM' },
     { label: 'MAPE', value: '12.4%', delta: '-0.8pp QoQ' },
     { label: 'Service Level', value: '96.5%', delta: '+0.7pp' },
